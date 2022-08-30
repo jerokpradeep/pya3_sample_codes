@@ -6,7 +6,7 @@ api_key=''
 
 # Connect and get session Id
 alice = Aliceblue(user_id=user_id,api_key=api_key)
-alice.get_session_id()
+print(alice.get_session_id())
 
 """
 Balance Wrapper Request
@@ -80,7 +80,8 @@ Modify Order Wrapper
 """
 Order history Wrapper
 """
-# get_order_history_response=alice.get_order_history('')
+get_order_history_response=alice.get_order_history('')
+print(get_order_history_response)
 # print(Alice_Wrapper.get_order_history(get_order_history_response))
 
 """
@@ -94,3 +95,4 @@ Cancel Order Wrapper
 """
 # cancel_order_response=alice.cancel_order(alice.get_instrument_by_token('NSE', 14366),'220818000186250')
 # print(Alice_Wrapper.cancel_order(cancel_order_response))
+

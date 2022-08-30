@@ -48,9 +48,11 @@ def socket():
             print("-------------------------------------------------------------------------------")
             pass
         else:
-            print("Feed :", feed_message)
-            LTP = feed_message[
-                'lp'] if 'lp' in feed_message else LTP  # If LTP in the response it will store in LTP variable
+            # print("Feed :", feed_message)
+            LTP = feed_message['lp'] if 'lp' in feed_message else LTP  # If LTP in the response it will store in LTP variable
+            print(type(feed_message["tk"]))
+            if feed_message["tk"] == '243769':
+                print(feed_message)
 
     # Socket Connection Request
     alice.start_websocket(socket_open_callback=socket_open, socket_close_callback=socket_close,
@@ -61,24 +63,23 @@ def socket():
     global subscribe_list, unsubscribe_list
 
     # Subscribe the Instrument
-    subscribe_list = [alice.get_instrument_by_token('INDICES', 26000)]
+    print("Subscribe :",datetime.now())
+    subscribe_list = [alice.get_instrument_by_token('MCX',243769),alice.get_instrument_by_token('MCX',243770)]
     alice.subscribe(subscribe_list)
-    print(datetime.now())
-    sleep(60)
-    print(datetime.now())
-    # unsubscribe_list = [alice.get_instrument_by_symbol("NSE", "RELIANCE")]
+    sleep(10)
+    # print("Unsubscribe :",datetime.now())
+    # unsubscribe_list = [alice.get_instrument_by_token("NFO",35018)]
     # alice.unsubscribe(unsubscribe_list)
     # sleep(8)
 
     # Stop the websocket
-    alice.stop_websocket()
-    sleep(10)
-    print(datetime.now())
-
-    # Connect the socket after socket close
-    alice.start_websocket(socket_open_callback=socket_open, socket_close_callback=socket_close,
-                          socket_error_callback=socket_error, subscription_callback=feed_data, run_in_background=True)
-
+    # alice.stop_websocket()
+    # sleep(10)
+    # print(datetime.now())
+    #
+    # # Connect the socket after socket close
+    # alice.start_websocket(socket_open_callback=socket_open, socket_close_callback=socket_close,
+    #                       socket_error_callback=socket_error, subscription_callback=feed_data, run_in_background=True)
 
 # strategy Function here you can implement your strategy
 def strategy():
